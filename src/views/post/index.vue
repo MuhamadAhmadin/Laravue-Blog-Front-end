@@ -5,7 +5,12 @@
       <div class="card">
         <h5 class="card-header">POST LIST</h5>
         <div class="card-body">
-          <button type="button" class="btn btn-sm btn-success">ADD POST</button>
+          <router-link
+            :to="{ name: 'post.create' }"
+            type="button"
+            class="btn btn-sm btn-success"
+            >ADD POST</router-link
+          >
           <div class="row mt-3">
             <div class="col-md-12">
               <table class="table table-hover">
@@ -23,12 +28,16 @@
                     <td>{{ post.title }}</td>
                     <td>{{ post.content }}</td>
                     <td>
-                      <router-link
-                        :to="{ name: 'post.edit', params: { id: post.id } }"
-                        class="btn btn-sm btn-warning"
-                        >Edit</router-link
-                      >
-                      <button class="btn btn-sm btn-danger ms-2">Delete</button>
+                      <div class="d-flex justify-content-between">
+                        <router-link
+                          :to="{ name: 'post.edit', params: { id: post.id } }"
+                          class="btn btn-sm btn-warning"
+                          >Edit</router-link
+                        >
+                        <button class="btn btn-sm btn-danger ms-2">
+                          Delete
+                        </button>
+                      </div>
                     </td>
                   </tr>
                 </tbody>
@@ -57,7 +66,6 @@ export default {
         .then((response) => {
           // assign state posts with response data
           posts.value = response.data.data;
-          console.log(response.data);
         })
         .catch((error) => {
           console.log(error.response.data);
